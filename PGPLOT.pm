@@ -53,7 +53,7 @@ PGPLOT - allow subroutines in the PGPLOT graphics library to be called from Perl
 
 =head1 DESCRIPTION
 
-This module provides an inteface to the PGPLOT graphics library. To
+This module provides an interface to the PGPLOT graphics library. To
 obtain the library and its manual, see L</OBTAINING PGPLOT>.
 
 For every PGPLOT function the module provides an equivalent Perl
