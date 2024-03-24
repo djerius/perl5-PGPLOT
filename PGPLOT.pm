@@ -19,7 +19,9 @@ pgqid pgqinf pgqitf pgqls pgqlw pgqndt pgqpos pgqtbg pgqtxt pgqvp pgqvsz pgqwin
 pgrect pgrnd pgrnge pgsah pgsave pgunsa pgscf pgsch pgsci pgscir pgsclp pgscr
 pgscrl pgscrn pgsfs pgshls pgshs pgsitf pgslct pgsls pgslw pgstbg pgsubp pgsvp
 pgvport pgswin pgwindow pgtbox pgtick pgtext pgupdt pgvect pgvsiz pgvsize
-pgvstd pgvstand pgwedg pgwnad );
+pgvstd pgvstand pgwedg pgwnad
+pggapline pgcolorpnts
+);
 
 if($^O =~ /mswin32/i) {
   local $DynaLoader::dl_dlext = 'xs.dll';
