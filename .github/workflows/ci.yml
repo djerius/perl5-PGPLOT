@@ -45,6 +45,8 @@ jobs:
         with:
           target-setup-perl: true
           perl-version: ${{ matrix.perl-version }}
+      - name: Install PDL dependencies
+        uses: PDLPorters/devops/github-actions/install-dep-pdl-dep@master
       - name: Install gfortran
         uses: PDLPorters/devops/github-actions/install-gfortran@master
       - name: Install PGPLOT
@@ -54,7 +56,7 @@ jobs:
         with:
           target-setup-perl: false
           target-install-dist-perl-deps: true
-          dist-perl-deps-configure: Devel::CheckLib ExtUtils::F77
+          dist-perl-deps-configure: PDL Devel::CheckLib ExtUtils::F77
           target-test-release-testing: true
           target-test: true
           test-enable-release-testing: ${{ matrix.release-test }}
