@@ -716,8 +716,6 @@ instead recommend that you do not turn on recording unless you need it.
 =back
 
 
-
-
 =head1 FUNCTIONS
 
 A more detailed listing of the functions and their usage follows. For
@@ -748,7 +746,7 @@ Exported constructor for PGPLOT object/device/plot window.
 =for usage
 
  Usage: pgwin($opt);
- Usage: pgwin($option->$value,...);
+ Usage: pgwin($option=>$value,...);
  Usage: pgwin($device);
 
 Parameters are passed on to new() and can either be specified by hash
@@ -2498,7 +2496,6 @@ sub new {
   $this_plotopt->synonyms($s);
   $this_plotopt->warnonmissing(0);
 
-  # Modified 7/4/02 JB to add CTAB as an aspect of the window.
   my $self = {
 	      'Options'	      => $this_opt,
 	      'PlotOptions'   => $this_plotopt,
