@@ -1100,7 +1100,7 @@ Sets the maximum value for the same.
 
 A more compact way to specify MIN and MAX, as a list:
 you can say "Range=>[0,10]" to scale the color table for
-brightness values between 0 and 10 in the iamge data.
+brightness values between 0 and 10 in the image data.
 
 =item CRANGE
 
