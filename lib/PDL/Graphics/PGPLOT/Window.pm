@@ -2343,8 +2343,8 @@ sub catch_signals (&) {
   my(@sigs) = ('INT');
   local($_, $@);
   if($sig_nest == 0) {
-    foreach $_(@sigs) {
-      next if ($SIG{$_}//0) == \&signal_catcher;
+    foreach (@sigs) {
+      next if ($SIG{$_}//'') ne 'DEFAULT' and ($SIG{$_}//0) == \&signal_catcher;
       $sig_handlers{$_}=$SIG{$_};
       $SIG{$_}=\&signal_catcher;
     }
