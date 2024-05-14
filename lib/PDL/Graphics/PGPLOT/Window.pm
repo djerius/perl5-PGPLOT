@@ -5841,18 +5841,12 @@ sub rgbi {
 	# What WCS system are we using?
 	# we could check that the WCS is valid here but we delegate it
 	# to the _FITS_tr() routine.
-	#
 	my %opt2 = %$u_opt; # copy options
 	my $wcs = delete $opt2{WCS} || "";
 	$opt2{Transform} = _FITS_tr($pane,$pdl,{WCS => $wcs});
 	delete @opt2{ grep /title/i, keys %opt2 };
 	$opt2{Align} //= 'CC';
 	$opt2{DrawWedge} //= 1;
-
-	my $min  = $opt->{min} // $pdl->min;
-	my $max  = $opt->{max} // $pdl->max;
-	my $unit = $pdl->gethdr->{BUNIT} || "";
-	my $rangestr = " ($min to $max $unit) ";
 
 	# I am assuming here that CUNIT1<A-Z> is a valid keyword for
 	# 'alternative' WCS mappings (DJB)
