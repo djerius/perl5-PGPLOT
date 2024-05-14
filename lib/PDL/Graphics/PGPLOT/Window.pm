@@ -5537,7 +5537,7 @@ sub arrow {
   # The ITF is in the general options - since other functions might want
   # it too.
   #
-  # There is some repetetiveness in the code, but this is to allow the
+  # There is some repetitiveness in the code, but this is to allow the
   # user to set global defaults when opening a new window.
   #
   #
@@ -5842,22 +5842,15 @@ sub rgbi {
 	# we could check that the WCS is valid here but we delegate it
 	# to the _FITS_tr() routine.
 	#
-	my $wcs = $$u_opt{WCS} || "";
-
 	my %opt2 = %$u_opt; # copy options
-	delete $opt2{WCS};
+	my $wcs = delete $opt2{WCS} || "";
 	$opt2{Transform} = _FITS_tr($pane,$pdl,{WCS => $wcs});
+	delete @opt2{ grep /title/i, keys %opt2 };
+	$opt2{Align} //= 'CC';
+	$opt2{DrawWedge} //= 1;
 
-	local($_);
-	foreach $_(keys %opt2){
-	    delete $opt2{$_} if (m/title/i);
-	}
-
-	$opt2{Align} = 'CC' unless defined($opt2{Align});
-	$opt2{DrawWedge} = 1 unless defined($opt2{DrawWedge});
-
-	my $min  = (defined $opt->{min}) ? $opt->{min} : $pdl->min;
-	my $max  = (defined $opt->{max}) ? $opt->{max} : $pdl->max;
+	my $min  = $opt->{min} // $pdl->min;
+	my $max  = $opt->{max} // $pdl->max;
 	my $unit = $pdl->gethdr->{BUNIT} || "";
 	my $rangestr = " ($min to $max $unit) ";
 
@@ -5873,18 +5866,12 @@ sub rgbi {
 		  )
 		);
 
-	my $o2 = \%opt2;
-
-	my $cmdstr =   '$pane->' . $cmd .
-	    '($pdl,' . (scalar(@rest) ? '@rest,' : '') .
-	    '$o2);';
-
-	eval $cmdstr;
+	$pane->$cmd($pdl, @rest, \%opt2);
 
         my $mkaxis = sub {
 	  my ($typ,$unit) = @_;
 	  our @templates = ("(arbitrary units)","%u","%t","%t (%u)");
-	  my $s = $templates[2 * (defined $typ) + (defined $unit && $unit !~ m/^\s+$/)];
+	  my $s = $templates[2 * defined($typ) + (defined $unit && $unit !~ m/^\s+$/)];
 	  $s =~ s/\%u/$unit/;
 	  $s =~ s/\%t/$typ/;
 	  $s;
