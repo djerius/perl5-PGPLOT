@@ -102,8 +102,8 @@ if ( !defined $Arg{IDIR} || !defined $Arg{LDIR} ) {
 
     # and if nothing worked, use some defaults
 
-    $Arg{IDIR} ||= $IDIR || '/usr/include,/Applications/PDL/pgplot,/usr/local/pgplot';
-    $Arg{LDIR} ||= $LDIR || '/usr/lib,/usr/lib64';
+    $Arg{IDIR} ||= $IDIR || '/usr/include,/Applications/PDL/pgplot,/usr/local/pgplot,/opt/homebrew/opt/pgplot/include';
+    $Arg{LDIR} ||= $LDIR || '/usr/lib,/usr/lib64,/opt/homebrew/opt/pgplot/lib';
 
 }
 
