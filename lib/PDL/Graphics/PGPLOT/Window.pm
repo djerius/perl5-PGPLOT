@@ -5867,7 +5867,6 @@ sub rgbi {
 						  HardCH=>undef,
 						  HardLW=>undef,
  					          TextThick=>undef,
-
 						  WCS => undef,
 						 });
 	}
@@ -5887,7 +5886,6 @@ sub rgbi {
 
 	# I am assuming here that CUNIT1<A-Z> is a valid keyword for
 	# 'alternative' WCS mappings (DJB)
-	#
 	$opt2{Pix}=1.0
 	    if( (!defined($opt2{Justify}) || !$opt2{Justify}) &&
 		(!defined($opt2{Pix})) &&
@@ -5899,24 +5897,23 @@ sub rgbi {
 
 	$pane->$cmd($pdl, @rest, \%opt2);
 
-        my $mkaxis = sub {
-	  my ($typ,$unit) = @_;
-	  our @templates = ("(arbitrary units)","%u","%t","%t (%u)");
-	  my $s = $templates[2 * defined($typ) + (defined $unit && $unit !~ m/^\s+$/)];
-	  $s =~ s/\%u/$unit/;
-	  $s =~ s/\%t/$typ/;
-	  $s;
-	};
-
 	$pane->label_axes(
 			  $opt->{XTitle} ||
-			  &$mkaxis($hdr->{"CTYPE1$wcs"},$hdr->{"CUNIT1$wcs"}),
+			  _mkaxis($hdr->{"CTYPE1$wcs"},$hdr->{"CUNIT1$wcs"}),
 			  $opt->{YTitle} ||
-			  &$mkaxis($hdr->{"CTYPE2$wcs"},$hdr->{"CUNIT2$wcs"}),
+			  _mkaxis($hdr->{"CTYPE2$wcs"},$hdr->{"CUNIT2$wcs"}),
 			  $opt->{Title}, $opt
 			  );
-
     } # sub: _fits_foo()
+
+    my @fits_templates = ("(arbitrary units)","%u","%t","%t (%u)");
+    sub _mkaxis {
+      my ($typ,$unit) = @_;
+      my $s = $fits_templates[2 * defined($typ) + (defined $unit && $unit !~ m/^\s+$/)];
+      $s =~ s/%u/$unit/;
+      $s =~ s/%t/$typ/;
+      $s;
+    }
 
     sub fits_imag {
 	my($self) = shift;
