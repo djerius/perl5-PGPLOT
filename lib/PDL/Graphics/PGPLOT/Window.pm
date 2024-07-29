@@ -5581,8 +5581,6 @@ sub arrow {
   #
 
   my $im_options = undef;
-
-
   sub _imag {
     my $self = shift;
 
@@ -5721,7 +5719,6 @@ sub arrow {
     $self->redraw_axes($u_opt) unless $self->held();
     1;
   } # sub: imag()
-
 }
 
 ######################################################################
@@ -5838,7 +5835,6 @@ sub rgbi {
 
     sub _fits_foo {
 	my $pane = shift;
-	my $cmd = shift;
 	my ($in,$opt_in) = _extract_hash(@_);
 	my ($pdl,@rest) = @$in;
 
@@ -5895,15 +5891,11 @@ sub rgbi {
 		  )
 		);
 
-	$pane->$cmd($pdl, @rest, \%opt2);
-
-	$pane->label_axes(
-			  $opt->{XTitle} ||
-			  _mkaxis($hdr->{"CTYPE1$wcs"},$hdr->{"CUNIT1$wcs"}),
-			  $opt->{YTitle} ||
-			  _mkaxis($hdr->{"CTYPE2$wcs"},$hdr->{"CUNIT2$wcs"}),
-			  $opt->{Title}, $opt
-			  );
+	([$pdl, @rest, \%opt2], [
+          $opt->{XTitle} || _mkaxis(@$hdr{"CTYPE1$wcs","CUNIT1$wcs"}),
+          $opt->{YTitle} || _mkaxis(@$hdr{"CTYPE2$wcs","CUNIT2$wcs"}),
+          $opt->{Title}, $opt
+        ]);
     } # sub: _fits_foo()
 
     my @fits_templates = ("(arbitrary units)","%u","%t","%t (%u)");
@@ -5916,23 +5908,31 @@ sub rgbi {
     }
 
     sub fits_imag {
-	my($self) = shift;
-	_fits_foo($self,'imag',@_);
+	my $self = shift;
+	my ($main_args, $label_args) = _fits_foo($self,@_);
+	$self->imag(@$main_args);
+	$self->label_axes(@$label_args);
     }
 
     sub fits_rgbi {
-	my($self) = shift;
-	_fits_foo($self,'rgbi',@_);
+	my $self = shift;
+	my ($main_args, $label_args) = _fits_foo($self,@_);
+	$self->rgbi(@$main_args);
+	$self->label_axes(@$label_args);
     }
 
     sub fits_cont {
-	my($self) = shift;
-	_fits_foo($self,'cont',@_);
+	my $self = shift;
+	my ($main_args, $label_args) = _fits_foo($self,@_);
+	$self->cont(@$main_args);
+	$self->label_axes(@$label_args);
     }
 
     sub fits_vect {
 	my($self) = shift;
-	_fits_vect($self,'vect',@_);
+	my ($main_args, $label_args) = _fits_foo($self,@_);
+	$self->vect(@$main_args);
+	$self->label_axes(@$label_args);
     }
 
 } # closure around _fits_foo and fits_XXXX routines
