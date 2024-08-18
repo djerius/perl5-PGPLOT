@@ -78,6 +78,7 @@ pgcompatbility.p
 pgfun.c
 PGPLOT.xs
 README
+t/00-report-prereqs.t
 t/lut.t
 t/pdl-graphics.t
 t/t1.t
