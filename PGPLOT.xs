@@ -1497,4 +1497,4 @@ BOOT:
        by other modules
    */
 
-   sv_setiv(perl_get_sv("PGPLOT::HANDLE",TRUE|GV_ADDMULTI), (IV) (void*) &myPGPLOT_handle);
+   sv_setiv(get_sv("PGPLOT::HANDLE",TRUE|GV_ADDMULTI), (IV) (void*) &myPGPLOT_handle);
