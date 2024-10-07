@@ -65,7 +65,7 @@ for the complete list of available functions.  Note that PGPLOT is at
 its heart a Fortran library, so the documentation describes the
 Fortran interface.
 
-Also refer to the extensive set of test scripts (C<test*.p>) included
+Also refer to the extensive set of test scripts (F<t/t*.t>) included
 in the module distribution for examples of usage of all kinds of
 PGPLOT routines.
 
@@ -231,6 +231,13 @@ See in particular L<PDL::Graphics::PGPLOT>.
 
 Be VERY careful binary data is of the right size or your segments
 might get violated.
+
+=head1 DEBUGGING
+
+As of 2.34, there is a C<PGPLOT::set_debugging> function (not
+exported). It takes an integer argument, and returns the previous value.
+When any PGPLOT function is called, if that level is >= 1, the name of
+the function will be printed to standard error.
 
 =head1 HISTORY
 
