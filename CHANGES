@@ -1,3 +1,5 @@
+- update C code to C23 compatibility (#18) - thanks @emollier
+
 2.35 2024-12-20
 - be more careful with datatypes (https://github.com/PDLPorters/pdl/issues/511)
 

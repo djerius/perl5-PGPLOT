@@ -75,8 +75,7 @@ void cpgconx ( float* a, int idim, int jdim, int i1, int i2,
 
 /* pgplot called function perl intermediate number 1 */
 
-float pgfun1(x)  
-   float *x; {
+float pgfun1(float *x) {
 
    dSP ;
    int count;
@@ -117,8 +116,7 @@ float pgfun1(x)
 
 /* pgplot called function perl intermediate number 2 */
 
-float pgfun2(x)  
-   float *x; {
+float pgfun2(float *x) {
 
    dSP ;
    int count;
@@ -158,9 +156,7 @@ float pgfun2(x)
 
 /* pgplot called function perl intermediate for PGCONX */
 
-void pgfunplot(visible,x,y,z)  
-   int *visible;
-   float *x,*y,*z; {
+void pgfunplot(int *visible, float *x, float *y, float *z) {
 
    dSP ;
    int count;
