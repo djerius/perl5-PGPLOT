@@ -306,7 +306,7 @@ pgconx(a,idim,jdim,i1,i2,j1,j2,c,nc,plot)
   CODE:
     DEBUG_PRINT(pgconx);
     pgfunname[0] = plot;
-    cpgconx(a,idim,jdim,i1,i2,j1,j2,c,nc,pgfunplot);
+    cpgconx(a,idim,jdim,i1,i2,j1,j2,c,nc,(void(*)(void))pgfunplot);
 
 
 void
@@ -462,7 +462,7 @@ pgfunt(fx,fy,n,tmin,tmax,pgflag)
     DEBUG_PRINT(pgfunt);
     pgfunname[0] = fx;
     pgfunname[1] = fy;
-    cpgfunt(pgfun1,pgfun2,n,tmin,tmax,pgflag);
+    cpgfunt((float(*)(void))pgfun1,(float(*)(void))pgfun2,n,tmin,tmax,pgflag);
 
 
 void
@@ -475,7 +475,7 @@ pgfunx(fy,n,xmin,xmax,pgflag)
   CODE:
     DEBUG_PRINT(pgfunx);
     pgfunname[0] = fy;
-    cpgfunx(pgfun1,n,xmin,xmax,pgflag);
+    cpgfunx((float(*)(void))pgfun1,n,xmin,xmax,pgflag);
 
 
 void
@@ -488,7 +488,7 @@ pgfuny(fx,n,ymin,ymax,pgflag)
   CODE:
     DEBUG_PRINT(pgfuny);
     pgfunname[0] = fx;
-    cpgfuny(pgfun1,n,ymin,ymax,pgflag);
+    cpgfuny((float(*)(void))pgfun1,n,ymin,ymax,pgflag);
 
 
 void

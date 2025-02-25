@@ -26,9 +26,9 @@
 /* Prototypes */
 
 static SV*  pgfunname[2];
-float pgfun1();
-float pgfun2();
-void   pgfunplot();
+float pgfun1(float *x);
+float pgfun2(float *x);
+void   pgfunplot(int *visible,float *x, float *y, float *z);
 void PGFUNX(float fy(), int *n, float *xmin, float *xmax, int *pgflag);
 void PGFUNY(float fx(), int *n, float *ymin, float *ymax, int *pgflag);
 void PGFUNT(float fx(), float fy(), int *n, float *tmin, float *tmax, int *pgflag);
