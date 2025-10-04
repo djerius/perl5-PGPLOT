@@ -19,7 +19,7 @@ WriteMakefile(
     MIN_PERL_VERSION => '5.010001',
     'NAME'	=> 'PGPLOT',
     alien_requires => { 'Alien::PGPLOT' => '5.2.2.4' },
-    CONFIGURE_REQUIRES => { 'Alien::Base::Wrapper' },
+    CONFIGURE_REQUIRES => { 'Alien::Base::Wrapper' => 2.8.4 },
     'TEST_REQUIRES' => { 'Test::More' => '0.88' },
     PREREQ_PM => { @prereq },
     'VERSION_FROM'	=> 'lib/PGPLOT.pm',
