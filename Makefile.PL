@@ -1,10 +1,22 @@
 use strict;
+use warnings;
 
 use Alien::Base::Wrapper 'WriteMakefile';
 
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
+my @prereq;
+my %min_version = (
+  'PDL' => '2.089', # broadcast_define, no PGPLOT
+);
+for my $opt_dep (sort keys %min_version) {
+  (my $file = $opt_dep) =~ s#::#/#g;
+  next if !eval { require "$file.pm"; 1 }; # not installed, fine
+  next if eval { $opt_dep->VERSION($min_version{$opt_dep}); 1 };
+  push @prereq, $opt_dep => $min_version{$opt_dep};
+}
+
+
 WriteMakefile(
+    MIN_PERL_VERSION => '5.010001',
     'NAME'	=> 'PGPLOT',
     alien_requires => { 'Alien::PGPLOT' => '5.2.2.4' },
     CONFIGURE_REQUIRES => { 'Alien::Base::Wrapper' },
